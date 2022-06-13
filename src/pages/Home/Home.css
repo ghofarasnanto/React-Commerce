@@ -1,0 +1,17 @@
+.navbar__link {
+    font-family: 'Rubik';
+    font-weight: 800;
+    cursor: pointer;
+    color: #6A4029 !important;
+}
+
+.navbar__link:hover {
+    transform: translateY(0px);
+    color: #6A4029 !important;
+    font-size: 20px;
+}
+
+.navbar__link--active {
+    border-bottom: 3px solid #29b6f6;
+    transition: border-bottom .5s ease-in-out;
+}
