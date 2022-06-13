@@ -22,7 +22,9 @@ import IsLogin from "./pages/IsLogin";
 import Payment from "./pages/Payment";
 import History from "./pages/History";
 import ScrollToTop from "./component/ScrollToTop";
-import DashboardAdmin from "./pages/DashbordAdmin"
+import DashboardAdmin from "./pages/DashbordAdmin";
+import AddProduct from "./component/Admin/AddProduct";
+import AdminProduct from "./pages/DashbordAdmin/Products";
 
 const token = localStorage.getItem("token");
 
@@ -36,6 +38,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/profile/:id" element={<UpdatePage />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="*" element={<ErrorPages />} />
           <Route
             path="/login"
             element={token ? <Navigate replace to="/products" /> : <Login />}
@@ -49,8 +54,7 @@ function App() {
             path="/profile"
             element={!token ? <Navigate replace to="/login" /> : <Profile />}
           />
-          <Route path="/profile/:id" element={<UpdatePage />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+
           <Route
             path="/payment"
             element={!token ? <Navigate replace to="/login" /> : <Payment />}
@@ -59,8 +63,23 @@ function App() {
             path="/history"
             element={!token ? <Navigate replace to="/login" /> : <History />}
           />
-           <Route path="/admin" element={<DashboardAdmin />} />
-          <Route path="*" element={<ErrorPages />} />
+          <Route
+            path="/admin"
+            element={
+              !token ? <Navigate replace to="/login" /> : <DashboardAdmin />
+            }
+          />
+          <Route
+            path="/admin/addproduct"
+            element={!token ? <Navigate replace to="/login" /> : <AddProduct />}
+          />
+          <Route
+            path="/admin/product"
+            element={
+              !token ? <Navigate replace to="/login" /> : <AdminProduct />
+            }
+          />
+          
         </Routes>
       </Router>
     </AnimatePresence>
