@@ -14,7 +14,7 @@ import SearchPage from "./pages/Products/SearchPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-import UpdatePage from "./pages/Profile/UpdatePage";
+import UpdateUser from "./pages/Profile/UpdateUser";
 import ForgotPassword from "./pages/ForgotPassword";
 import ProductDetail from "./pages/ProductDetail";
 import ErrorPages from "./pages/ErrorPages";
@@ -38,9 +38,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/profile/:id" element={<UpdatePage />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="*" element={<ErrorPages />} />
+          <Route path="/islogin" element={<IsLogin />} />
           <Route
             path="/login"
             element={token ? <Navigate replace to="/products" /> : <Login />}
@@ -48,13 +48,15 @@ function App() {
           <Route
             path="/signup"
             element={token ? <Navigate replace to="/islogin" /> : <Signup />}
-          />
-          <Route path="/islogin" element={<IsLogin />} />
+          />          
           <Route
+            path="/profile/edit"
+            element={!token ? <Navigate replace to="/login" /> : <UpdateUser />}
+          />
+           <Route
             path="/profile"
             element={!token ? <Navigate replace to="/login" /> : <Profile />}
           />
-
           <Route
             path="/payment"
             element={!token ? <Navigate replace to="/login" /> : <Payment />}

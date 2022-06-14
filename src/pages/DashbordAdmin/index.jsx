@@ -49,13 +49,13 @@ export class Profile extends Component {
                     <button className="promotion-btn">
                       <span className="notification-badge">1</span>
                       <a href=" ">
-                        <img src="assets/img/chat.png" alt="chat-img" />
+                        <img src="/assets/img/chat.png" alt="chat-img" />
                       </a>
                     </button>
                     <button className="profile-btn">
                       <Link to="/profile">
                         <img
-                          src="assets/img/home/cust1.png"
+                          src="/assets/img/home/cust1.png"
                           alt="profile-img"
                         />
                       </Link>
@@ -88,9 +88,9 @@ export class Profile extends Component {
                           id="radio1"
                           name="optradio"
                           value="option1"
-                          checked
+                          defaultChecked
                         />
-                        <label className="form-check-label my-5" for="radio1">
+                        <label className="form-check-label my-5" htmlFor="radio1">
                           <h4 className="p-2"> Daily</h4>
                         </label>
                       </div>
@@ -103,9 +103,9 @@ export class Profile extends Component {
                           id="radio1"
                           name="optradio"
                           value="option1"
-                          checked
+                          defaultChecked
                         />
-                        <label className="form-check-label my-5" for="radio1">
+                        <label className="form-check-label my-5" htmlFor="radio1">
                           <h4 className="p-2"> Weekly</h4>
                         </label>
                       </div>
@@ -118,9 +118,9 @@ export class Profile extends Component {
                           id="radio1"
                           name="optradio"
                           value="option1"
-                          checked
+                          defaultChecked
                         />
-                        <label className="form-check-label my-5" for="radio1">
+                        <label className="form-check-label my-5" htmlFor="radio1">
                           <h4 className="p-2"> Monthly</h4>
                         </label>
                       </div>
@@ -133,7 +133,7 @@ export class Profile extends Component {
                     <div className="card-checkout d-flex flex-column px-4 py-0">
                     <img
             className=""
-            src="assets/img/temporary.png"
+            src="/assets/img/temporary.png"
             alt="coffe-bg"
           />
                       {/* <div className="col-xl-12 col-md-12">
@@ -211,7 +211,7 @@ export class Profile extends Component {
                     <div className="d-flex flex-column text-left card-checkout px-3 my-0">
                     <img
             className=""
-            src="assets/img/temp1.png"
+            src="/assets/img/temp1.png"
             alt="coffe-bg"
           />
                       {/* <div className="text-left ">
@@ -233,7 +233,7 @@ export class Profile extends Component {
                     <div className="d-flex flex-column text-left card-checkout px-3 my-4">
                     <img
             className=""
-            src="assets/img/temp2.png"
+            src="/assets/img/temp2.png"
             alt="coffe-bg"
           />
                       {/* <div className="text-left ">
@@ -244,9 +244,9 @@ export class Profile extends Component {
                             id="radio1"
                             name="optradio"
                             value="option1"
-                            checked
+                            defaultChecked
                           />
-                          <label className="form-check-label" for="radio2">
+                          <label className="form-check-label" htmlFor="radio2">
                             <div className="card-icon p-2">
                               <i className="fa fa-credit-card-alt"></i>
                             </div>
@@ -263,7 +263,7 @@ export class Profile extends Component {
                           name="optradio"
                           value="option2"
                         />
-                        <label className="form-check-label" for="radio2">
+                        <label className="form-check-label" htmlFor="radio2">
                           <div className="bank-icon p-2">
                             <i className="fa fa-university"></i>
                           </div>
@@ -279,7 +279,7 @@ export class Profile extends Component {
                           name="optradio"
                           value="option2"
                         />
-                        <label className="form-check-label" for="radio2">
+                        <label className="form-check-label" htmlFor="radio2">
                           <div className="cod-icon p-2">
                             <i className="fa fa-truck"></i>
                           </div>

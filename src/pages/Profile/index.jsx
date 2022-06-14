@@ -13,7 +13,7 @@ export class Profile extends Component {
       items: [],
       isFetching: false,
       redirectToReferrer: false,
-      token: "",
+      token: "",    
     };
   }
 
@@ -124,7 +124,7 @@ export class Profile extends Component {
               </div>
             </div>
           </header>
-        </nav>       
+        </nav>
         <AnimatedPage>
           <GetProfile
             profile={this.state.items}

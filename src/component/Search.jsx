@@ -21,7 +21,7 @@ const Search = () => {
     }
   }, [location, product_name])
 
-  console.log("my product_name", product_name);
+  // console.log("my product_name", product_name);
 
   return (
     <form onSubmit={searchHandler}>

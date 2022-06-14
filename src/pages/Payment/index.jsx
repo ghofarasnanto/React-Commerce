@@ -189,7 +189,7 @@ export class Profile extends Component {
                             id="radio1"
                             name="optradio"
                             value="option1"
-                            checked
+                            defaultChecked
                           />
                            <label className="form-check-label" htmlFor="radio2">                        
                         <div className="card-icon p-2">        

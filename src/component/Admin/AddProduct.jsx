@@ -1,27 +1,56 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import axios from "axios";
-// import BASE_URL from "../../BASE_URL";
+import axios from "axios";
+import BASE_URL from "../../BASE_URL";
 import AnimatedPage from "../../AnimatePage";
 import Search from "../Search";
+import toast, { Toaster } from "react-hot-toast";
 
 export class ProductDetail extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      emailAddress: "",
-      userName: "",
-      deliveryAddress: "",
-      mobileNumber: "",
-      firstName: "",
-      lastName: "",
-      birthDate: "",
-      gender: "",
-      image: "",
-      previewImage: "../../../client/public/assets/img/404.png",
-      sourceimage: false,
+      product_name: "",
+      description: "",
+      price: "",
+      isFetching: false,
+      redirectToReferrer: false,
     };
   }
+
+  handleProductInput = (event) => {
+    event.preventDefault();
+    const { product_name, price, description } = this.state;
+    const body = {
+      product_name: product_name,
+      price: price,
+      description: description,
+    };
+
+    const token = localStorage.getItem("token");
+    axios
+      .post(`${BASE_URL}/products/`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        toast.success("Created Product Successfully!");
+        console.log(res);
+        this.setState({
+          data: res.data.data,
+          isFetching: true,
+          redirectToReferrer: false,
+        });
+      })
+      .catch(function (error) {
+        if (error.response.status === 400) {
+          toast.error("Unsuccessfully Created Product!");
+          console.log(error);
+        }
+      });
+  };
 
   render() {
     return (
@@ -93,13 +122,14 @@ export class ProductDetail extends Component {
           </header>
         </nav>
         <main>
+          <Toaster />
           <div className="img-bg-menu-detail"></div>
           <div className="bg-img-detail-menu" style={{ marginTop: "50%" }}>
             <div className="title-header-d-menu">
               <b>Favorite & Promo / Add New Product</b>
             </div>
             <AnimatedPage>
-              <section>
+              <form onSubmit={this.handleProductInput}>
                 <div className="d-flex flex-row py-5">
                   <div className="col-md-4">
                     <div className="flex-column ">
@@ -215,10 +245,16 @@ export class ProductDetail extends Component {
                         <div className="input-group">
                           <label>Name :</label>
                           <input
-                            name="email"
+                            name="text"
                             placeholder="Type product name min 50 character"
-                            type="email"
+                            type="text"
                             required={true}
+                            value={this.state.product_name}
+                            onChange={(event) => {
+                              this.setState({
+                                product_name: event.target.value,
+                              });
+                            }}
                           />
                         </div>
                       </div>
@@ -228,8 +264,14 @@ export class ProductDetail extends Component {
                           <input
                             name="price"
                             placeholder="Type the price"
-                            type="price"
+                            type="number"
                             required={true}
+                           value={this.state.price}
+                            onChange={(event) => {
+                              this.setState({
+                                price: event.target.value,
+                              });
+                            }}
                           />
                         </div>
                       </div>
@@ -239,8 +281,14 @@ export class ProductDetail extends Component {
                           <input
                             name="description"
                             placeholder="Describe your product min 150 character"
-                            type="description"
+                            type="text"
                             required={true}
+                            value={this.state.description}
+                            onChange={(event) => {
+                              this.setState({
+                                description: event.target.value,
+                              });
+                            }}
                           />
                         </div>
                       </div>
@@ -252,6 +300,9 @@ export class ProductDetail extends Component {
                             <a href=" ">R</a>
                             <a href=" ">L</a>
                             <a href=" ">XL</a>
+                            <p href=" ">200gr</p>
+                            <p href=" ">340gr</p>
+                            <p href=" ">500gr</p>
                           </div>
                         </div>
                       </div>
@@ -265,17 +316,19 @@ export class ProductDetail extends Component {
                         </div>
                       </div>
                       <div className="p-2">
-                        <Link to="/404" className="login-button">
-                          Save product
-                        </Link>
-                        <Link to="/404" className="google-submit text-decoration-none">
+                        <input type="submit" className="login-button" />
+
+                        <Link
+                          to="/404"
+                          className="google-submit text-decoration-none"
+                        >
                           Cancel
                         </Link>
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>
+              </form>
             </AnimatedPage>
           </div>
         </main>

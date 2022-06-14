@@ -24,7 +24,6 @@ export class Signup extends Component {
     };
   }
   
-
   handleUserInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;

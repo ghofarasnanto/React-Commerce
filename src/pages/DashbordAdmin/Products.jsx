@@ -350,7 +350,7 @@ export class Products extends Component {
               </ul>
               <div className="col-xl-12 col-md-12 my-4 px-0">
               <Link
-                to="/admin/addproduct"
+                to="/404"
                 className="btn btn-primary btn-lg btn-block aside-button"
               >
                 Add Promo

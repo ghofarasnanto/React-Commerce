@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import Moment from "moment";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import BASE_URL from "../BASE_URL";
+import AnimatedPage from "../../AnimatePage";
+import BASE_URL from "../../BASE_URL";
 import toast, { Toaster } from "react-hot-toast";
+
 
 export class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailAddress: "",
-      userName: "",
-      deliveryAddress: "",
-      mobileNumber: "",
-      firstName: "",
-      lastName: "",
-      birthDate: "",
+      email_address: "",
+      username: "",
+      delivery_address: "",
+      mobile_number: "",
+      first_name: "",
+      last_name: "",
+      birth_date: "",
       gender: "",
       image: "",
       previewImage: "../../../client/public/assets/img/404.png",
@@ -25,7 +26,17 @@ export class Profile extends Component {
   }
 
   handleUserInput = () => {
-    const body = this.state;
+    const { email_address, username, delivery_address, mobile_number, first_name, last_name, birth_date } = this.state;
+    const body = {
+      email_address: email_address,
+      username: username,
+      delivery_address: delivery_address,
+      mobile_number: mobile_number,
+      first_name: first_name,
+      last_name: last_name,
+      birth_date:birth_date,
+      
+    };
     const token = localStorage.getItem("token");
     // console.log(token);
     const decoded = jwt_decode(token);
@@ -73,21 +84,13 @@ export class Profile extends Component {
     }
   };
 
-  render() {
-    const { profile, loading } = this.props;
-
-    if (loading) {
-      return <h2>Loading...</h2>;
-    }
-
-    // const formatYmd = Moment().format("DD-MM-YYYY");
-
+  render() {   
     return (
       <div>
         <Toaster />
-        {profile ? (
+       
           <div>
-            <main key={profile}>
+            <main>
               <img
                 className="img-bg-profile"
                 src="assets/img/background.png"
@@ -97,16 +100,17 @@ export class Profile extends Component {
                 <div className="title-header">
                   <b>User Profile</b>
                 </div>
+                <AnimatedPage>
                 <div className="row justify-content-md-center my-3 p-3 bg-white rounded shadow-sm bg-input">
                   <div className="col-sm-4 aside-input" style={{ padding: 15 }}>
                     <img
                       className="img-profile"
-                      src={`http://localhost:8080/${profile.image}`}
+                      src={`http://localhost:8080/${this.state.image}`}
                       alt="user"
                     />
                     <div className="name-header">
-                      <b>{profile.username}</b>
-                      <p>{profile.email_address}</p>
+                      <b>{this.state.username}</b>
+                      <p>{this.state.email_address}</p>
                     </div>
                     <label className="btn btn-primary btn-lg btn-block aside-button">
                       <input               
@@ -151,7 +155,7 @@ export class Profile extends Component {
                   <div className="main-input col-sm-8">
                     <div className="contact-title">
                       Contact
-                      <Link to={`/profile/${profile.id}`}>
+                      <Link to={`/profile/edit`}>
                         <div className="edit-icons">
                           <i className="fa fa-pencil"></i>
                         </div>
@@ -172,7 +176,7 @@ export class Profile extends Component {
                             placeholder="Enter your email"
                             type="email"
                             required={true}                           
-                            defaultValue={profile.email_address}     
+                            value={this.state.email_address}     
                            disabled                     
                           />
                         </div>
@@ -185,7 +189,12 @@ export class Profile extends Component {
                             placeholder="Mobile Number"
                             title="Please enter you Mobile Number"
                             required={true}
-                            defaultValue={profile.mobile_number}                 
+                            value={this.state.mobile_number}
+                            onChange={(event) => {
+                              this.setState({
+                                mobile_number: event.target.value,
+                              });
+                            }}               
                           />
                         </div>
                       </div>
@@ -199,7 +208,12 @@ export class Profile extends Component {
                             placeholder="Address"
                             title="Please enter you Address"
                             required={true}
-                            defaultValue={profile.delivery_address}
+                            value={this.state.delivery_address}
+                            onChange={(event) => {
+                              this.setState({
+                                delivery_address: event.target.value,
+                              });
+                            }}   
                           ></textarea>
                         </div>
                       </div>
@@ -218,7 +232,12 @@ export class Profile extends Component {
                             placeholder="Displayname"
                             title="Please enter you Display Name"
                             required={true}
-                            defaultValue={profile.username}
+                            value={this.state.username}
+                            onChange={(event) => {
+                              this.setState({
+                                username: event.target.value,
+                              });
+                            }}   
                           />
                         </div>
                       </div>
@@ -230,7 +249,12 @@ export class Profile extends Component {
                             placeholder="Firstname"
                             title="Please enter you First Name"
                             required={true}
-                            defaultValue={profile.first_name}
+                            value={this.state.first_name}
+                            onChange={(event) => {
+                              this.setState({
+                                first_name: event.target.value,
+                              });
+                            }}  
                           />
                         </div>
                       </div>
@@ -243,8 +267,13 @@ export class Profile extends Component {
                             type="text"
                             placeholder="Lastname"
                             title="Please enter you Last Name"
-                            required=""
-                            defaultValue={profile.last_name}
+                            required={true}
+                            value={this.state.last_name}
+                            onChange={(event) => {
+                              this.setState({
+                                last_name: event.target.value,
+                              });
+                            }}  
                           />
                         </div>
                       </div>
@@ -255,7 +284,12 @@ export class Profile extends Component {
                             type="date"
                             placeholder="Brithdate"
                             title="Please enter you Brithdate"
-                            defaultValue={profile.brith_date}
+                            value={this.state.brith_date}
+                            onChange={(event) => {
+                              this.setState({
+                                brith_date: event.target.value,
+                              });
+                            }}  
                             required={true}
                           />
                         </div>
@@ -275,10 +309,10 @@ export class Profile extends Component {
                     </div>
                   </div>
                 </div>
+                </AnimatedPage>
               </div>
             </main>
           </div>
-        ) : null}
       </div>
     );
   }
