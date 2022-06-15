@@ -110,7 +110,7 @@ function ProductDetail() {
               <div className="col-sm-11 aside-input">
                 <img
                   className="img-menu-detail"
-                  src={`http://localhost:8080${productDetails.image}`}
+                  src={`${process.env.REACT_APP_BASE_URL}${productDetails.image}`}
                   alt="img-product"
                 />
                 <div className="name-header-d-menu">

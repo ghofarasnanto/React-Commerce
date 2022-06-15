@@ -25,7 +25,7 @@ export class Product extends Component {
                     <div className="menu-box-header ">
                       <div className="menu-images ">
                         <img
-                          src={`http://localhost:8080${product.image}`}
+                          src={`${process.env.REACT_APP_BASE_URL}${product.image}`}
                           alt="product "
                         />
                       </div>

@@ -14,7 +14,7 @@ export class Promos extends Component {
           ?  promos.map((promo) => (
               <div key={promo.id} className="promotion-box ">
                 <img
-                  src={`http://localhost:8080/${promo.image}`}
+                  src={`${process.env.REACT_APP_BASE_URL}/${promo.image}`}
                   alt="promo"
                 />
                 

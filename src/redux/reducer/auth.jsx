@@ -1,5 +1,5 @@
 import {
-  PENDING,
+  LOADING,
   FULLFILLED,
   REJECTED,
   authLogin,
@@ -7,22 +7,22 @@ import {
 
 const initialState = {
   data: {},
-  isLoading: false,
+  isFetching: false,
   err: null,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case authLogin + PENDING:
+    case authLogin + LOADING:
       return { ...state, isLoading: true };
     case authLogin + FULLFILLED:
       return {
         ...state,
         data: action.payload.value.data.data,
-        isLoading: false,
+        isFetching: false,
       };
     case authLogin + REJECTED:
-      return { ...state, err: action.payload, isLoading: false };
+      return { ...state, err: action.payload, isFetching: false };
     default:
       return state;
   }

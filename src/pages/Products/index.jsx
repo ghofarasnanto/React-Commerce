@@ -198,6 +198,7 @@ export class Products extends Component {
                   <div className=" item-status">
                     <li                      
                       className="status-type"
+                      href="?category=2"
                       id={2}
                       onClick={this.filterCategory}
                     >
@@ -207,6 +208,7 @@ export class Products extends Component {
                   <div className="item-status ">
                     <li
                       className="status-type"
+                      href="?category=5"
                       id={5}
                       onClick={this.filterCategory}
                     >

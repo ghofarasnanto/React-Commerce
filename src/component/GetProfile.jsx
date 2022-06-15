@@ -10,27 +10,36 @@ export class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailAddress: "",
-      userName: "",
-      deliveryAddress: "",
-      mobileNumber: "",
-      firstName: "",
-      lastName: "",
-      birthDate: "",
-      gender: "",
-      image: "",
-      previewImage: "../../../client/public/assets/img/404.png",
-      sourceimage: false,
+      body: {
+	email_address: props.profile.email_address,
+	username: props.profile.username,
+	delivery_address: props.profile.delivery_address,
+	mobile_number: props.profile.mobile_number,
+	first_name: props.profile.first_name,
+	last_name: props.profile.last_name,
+	birth_date: props.profile.birth_date,
+	photo: props.profile.photo,
+      },
+      // previewImage: "../../../client/public/assets/img/404.png",
+      // sourceimage: false,
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+	if (prevState.body !== this.state.body) {
+		this.setState({
+			body: this.state.body,
+		});    
+	}
+  // console.log(this.state.body)
+  }
+
   handleUserInput = () => {
-    const body = this.state;
     const token = localStorage.getItem("token");
     // console.log(token);
     const decoded = jwt_decode(token);
     axios
-      .patch(`${BASE_URL}/users/${decoded.id}`, body, {
+      .patch(`${BASE_URL}/users/${decoded.id}`, this.state.body, {
         headers: { Authorization: `Bearer ${token}` , "content-type": "multipart/form-data" },
       })
       .then((res) => {
@@ -101,7 +110,7 @@ export class Profile extends Component {
                   <div className="col-sm-4 aside-input" style={{ padding: 15 }}>
                     <img
                       className="img-profile"
-                      src={`http://localhost:8080/${profile.image}`}
+                      src={`${BASE_URL}${profile.image}`}
                       alt="user"
                     />
                     <div className="name-header">
@@ -185,7 +194,12 @@ export class Profile extends Component {
                             placeholder="Mobile Number"
                             title="Please enter you Mobile Number"
                             required={true}
-                            defaultValue={profile.mobile_number}                 
+                            defaultValue={profile.mobile_number} 
+                            onChange={(event) => {
+                              this.setState({
+                                body:{mobile_number : event.target.value},
+                              });
+                            }}                
                           />
                         </div>
                       </div>
@@ -200,6 +214,11 @@ export class Profile extends Component {
                             title="Please enter you Address"
                             required={true}
                             defaultValue={profile.delivery_address}
+                            onChange={(event) => {
+                              this.setState({
+                                body:{delivery_address : event.target.value},
+                              });
+                            }}     
                           ></textarea>
                         </div>
                       </div>
@@ -219,6 +238,11 @@ export class Profile extends Component {
                             title="Please enter you Display Name"
                             required={true}
                             defaultValue={profile.username}
+                            onChange={(event) => {
+                              this.setState({
+                                body:{username : event.target.value},
+                              });
+                            }}    
                           />
                         </div>
                       </div>
@@ -231,6 +255,11 @@ export class Profile extends Component {
                             title="Please enter you First Name"
                             required={true}
                             defaultValue={profile.first_name}
+                            onChange={(event) => {
+                              this.setState({
+                                body:{first_name : event.target.value},
+                              });
+                            }}   
                           />
                         </div>
                       </div>
@@ -245,6 +274,11 @@ export class Profile extends Component {
                             title="Please enter you Last Name"
                             required=""
                             defaultValue={profile.last_name}
+                            onChange={(event) => {
+                              this.setState({
+                                body:{last_name : event.target.value},
+                              });
+                            }}  
                           />
                         </div>
                       </div>
@@ -257,6 +291,11 @@ export class Profile extends Component {
                             title="Please enter you Brithdate"
                             defaultValue={profile.brith_date}
                             required={true}
+                            onChange={(event) => {
+                              this.setState({
+                                body:{brith_date : event.target.value},
+                              });
+                            }}  
                           />
                         </div>
                       </div>

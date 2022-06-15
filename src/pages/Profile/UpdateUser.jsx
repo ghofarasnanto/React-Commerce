@@ -105,7 +105,7 @@ export class Profile extends Component {
                   <div className="col-sm-4 aside-input" style={{ padding: 15 }}>
                     <img
                       className="img-profile"
-                      src={`http://localhost:8080/${this.state.image}`}
+                      src={`${process.env.REACT_APP_BASE_URL}${this.state.image}`}
                       alt="user"
                     />
                     <div className="name-header">

@@ -266,7 +266,7 @@ export class ProductDetail extends Component {
                             placeholder="Type the price"
                             type="number"
                             required={true}
-                           value={this.state.price}
+                            value={this.state.price}
                             onChange={(event) => {
                               this.setState({
                                 price: event.target.value,
@@ -293,9 +293,9 @@ export class ProductDetail extends Component {
                         </div>
                       </div>
                       <div className="p-2">
+                        <label>Input product size :</label>
+                        <h5> CLick size you want to use for this product</h5>
                         <div className="input-group">
-                          <label>Input product size :</label>
-                          <h5> CLick size you want to use for this product</h5>
                           <div className="d-flex icon-size-d-menu">
                             <a href=" ">R</a>
                             <a href=" ">L</a>

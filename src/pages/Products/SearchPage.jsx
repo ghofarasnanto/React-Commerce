@@ -145,7 +145,7 @@ const SearchPage = () => {
                   </li>
                 </div>
               </div>
-            </div>
+            </div> 
             <section className="d-flex justify-content-end col-md-12 px-2">
               <div className="dropdown">
                 <button
@@ -192,7 +192,7 @@ const SearchPage = () => {
                   <div
                     className="alert alert-warning"
                     role="alert"
-                    style={{ height: "19vh" }}
+                    style={{ height: "26vh" }}
                   >
                     <h2>
                       Pencarian kata kunci "{search}" gagal. Silahkan coba lagi
@@ -215,7 +215,7 @@ const SearchPage = () => {
                           <div className="menu-box-header ">
                             <div className="menu-images ">
                               <img
-                                src={`http://localhost:8080${product.image}`}
+                                src={`${process.env.REACT_APP_BASE_URL}${product.image}`}
                                 alt="product "
                               />
                             </div>

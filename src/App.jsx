@@ -1,6 +1,7 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { AnimatePresence } from "framer-motion";
+// import { Provider as ReduxProvider } from "react-redux";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -26,10 +27,13 @@ import DashboardAdmin from "./pages/DashbordAdmin";
 import AddProduct from "./component/Admin/AddProduct";
 import AdminProduct from "./pages/DashbordAdmin/Products";
 
+// import store from "./redux/store";
+
 const token = localStorage.getItem("token");
 
 function App() {
   return (
+    // <ReduxProvider store={store}>
     <AnimatePresence exitBeforeEnter>
       <Router>
         <ScrollToTop />
@@ -82,9 +86,10 @@ function App() {
             }
           />
           
-        </Routes>
+        </Routes>        
       </Router>
     </AnimatePresence>
+    // </ReduxProvider>
   );
 }
 

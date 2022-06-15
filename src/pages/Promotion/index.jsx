@@ -14,7 +14,7 @@ export class Promos extends Component {
   componentDidMount() {
     this.setState({ isFetching: true });
     axios
-      .get("http://localhost:8080/promos")
+      .get(`${process.env.REACT_APP_BASE_URL}/promos`)
       .then((res) => {
         this.setState({ promosCollection: res.data.data });
         console.log(res);
