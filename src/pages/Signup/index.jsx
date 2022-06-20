@@ -154,7 +154,7 @@ export class Signup extends Component {
                     onChange={this.handleUserInput}
                   />
                   <i
-                    className="fa fa-eye password-icon"
+                    className={isPasswordShown ? "fa fa-eye password-icon" : "fa fa-eye-slash password-icon" }
                     onClick={this.togglePasswordVisiblity}
                   />
                 </div>

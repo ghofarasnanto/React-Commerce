@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./products.css";
-import BASE_URL from "../../BASE_URL";
-import axios from "axios";
+// import BASE_URL from "../../BASE_URL";
+// import axios from "axios";
+import { connect } from "react-redux";
 
 import AnimatedPage from "../../AnimatePage";
 import Pagination from "../../component/Pagination";
@@ -10,122 +11,174 @@ import Product from "../../component/Product";
 import Promotion from "../Promotion";
 import NavIsActive from "../../component/NavIsActive";
 import NavNoActive from "../../component/NavNoActive";
+import withSearchParams from "../../helper/withSearchParams";
+import { loadProgressBar } from "x-axios-progress-bar";
+
+import { getAllProductsRedux } from "../../redux/actionType/products";
 
 export class Products extends Component {
   constructor() {
     super();
     this.state = {
-      productCollection: [],
-      productName: "",
-      isFetching: false,
-      totalPage: 0,
-      categoryId: 0,
-      orderBy: "",
-      sortBy: "",
-      isActive: false,
+      // productCollection: [],
+      // productName: "",
+      // isFetching: false,
+      // totalPage: 0,
+      // categoryId: 0,
+      // orderBy: "",
+      // sortBy: "",
+      // nextLink: null,
+      // prevLink: null,
+      // currentPage: 0,
       token: localStorage.getItem("token") || "",
+      role: localStorage.getItem("role"),
     };
   }
 
-  componentDidMount() {
-    this.setState({ isFetching: true });
-    axios
-      .get(
-        `${BASE_URL}/products?limit=12` //sort=ASC&limit=12&category=3&page=2&order=price&page=1&product_name=milk
+  componentDidMount() {    
+    const { searchParams, dispatch } = this.props;
+    dispatch(
+      getAllProductsRedux(
+        searchParams.get("product_name") || "",
+        searchParams.get("category") || "",
+        searchParams.get("order") || "created_at",
+        searchParams.get("sort") || "asc"
       )
-      .then((res) => {
-        this.setState({
-          productCollection: res.data.data,
-          totalPage: res.data.total_page,
-        });
-        console.log(res);
-        this.setState({ isFetching: false });
-      })
-      .catch(function (error) {
-        console.log(error);
-        this.setState({ isFetching: false });
-      });
+    );
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.categoryId !== this.state.categoryId ||
-      prevState.orderBy !== this.state.orderBy ||
-      prevState.sortBy !== this.state.sortBy
-    ) {
-      axios
-        .get(
-          `${BASE_URL}/products?category=${this.state.categoryId}&order=${this.state.orderBy}&limit=12&sort=${this.state.sortBy}`
+  componentDidUpdate(prevProps) {
+    const { searchParams, dispatch } = this.props;
+    if (prevProps.searchParams !== searchParams) {
+      dispatch(
+        getAllProductsRedux(
+          searchParams.get("product_name") || "",
+          searchParams.get("category") || "",
+          searchParams.get("order") || "created_at",
+          searchParams.get("sort") || "asc",
+          searchParams.get("page") || "1"
         )
-        .then((res) => {
-          this.setState({
-            productCollection: res.data.data,
-            totalPage: res.data.total_page,
-          });
-          console.log(res);
-          this.setState({ isFetching: false });
-        })
-        .catch(function (error) {
-          console.log(error);
-          this.setState({ isFetching: false });
-        });
+      );
     }
-    // if (prevState.orderBy !== this.state.orderBy || prevState.sortBy !== this.state.sortBy) {
-    //   axios
-    //     .get(`${BASE_URL}/products?order=${this.state.orderBy}&limit=12&sort=${this.state.sortBy}`)
-    //     .then((res) => {
-    //       this.setState({
-    //         productCollection: res.data.data,
-    //         totalPage: res.data.total_page,
-    //       });
-    //     });
-    //   }
-    // if (prevState.sortBy !== this.state.sortBy) {
-    //   axios
-    //     .get(`${BASE_URL}/products?sort=${this.state.sortBy}&limit=12`)
-    //     .then((res) => {
-    //       this.setState({
-    //         productCollection: res.data.data,
-    //         totalPage: res.data.total_page,
-    //       });
-    //     });
-    //   }
   }
 
-  filterCategory = (event) => {
-    const { id } = event.target;
-    console.log(event.target);
-    this.setState({
-      categoryId: id,
-    });
-    console.log(id);
+  handlePagination = (event, page) => {
+    event.preventDefault();
+    const { searchParams, setSearchParams } = this.props;
+    const category = searchParams.get("category") || "";
+    const product_name = searchParams.get("product_name") || "";
+    const order = searchParams.get("order") || "created_at";
+    const sort = searchParams.get("sort") || "asc";
+    setSearchParams({ product_name, category, order, sort, page });
+    window.scrollTo(0, 0);
   };
 
-  orderBy = (event) => {
-    const { id } = event.target;
-    console.log(event.target);
-    this.setState({
-      orderBy: id,
-    });
-    console.log(id);
-  };
+  // componentDidMount() {
+  //   this.setState({ isFetching: true });
+  //   axios
+  //     .get(
+  //       `${BASE_URL}/products?limit=12` //sort=ASC&limit=12&category=3&page=2&order=price&page=1&product_name=milk
+  //     )
+  //     .then((res) => {
+  //       this.setState({
+  //         productCollection: res.data.data,
+  //         totalPage: res.data.total_page,
+  //       });
+  //       console.log(res);
+  //       this.setState({ isFetching: false });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       this.setState({ isFetching: false });
+  //     });
+  // }
 
-  sortBy = (event) => {
-    const { id } = event.target;
-    console.log(event.target);
-    this.setState({
-      sortBy: id,
-    });
-    console.log(id);
-  };
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     prevState.categoryId !== this.state.categoryId ||
+  //     prevState.orderBy !== this.state.orderBy ||
+  //     prevState.sortBy !== this.state.sortBy
+  //   ) {
+  //     axios
+  //       .get(
+  //         `${BASE_URL}/products?category=${this.state.categoryId}&order=${this.state.orderBy}&limit=12&sort=${this.state.sortBy}`
+  //       )
+  //       .then((res) => {
+  //         this.setState({
+  //           productCollection: res.data.data,
+  //           totalPage: res.data.total_page,
+  //         });
+  //         console.log(res);
+  //         this.setState({ isFetching: false });
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //         this.setState({ isFetching: false });
+  //       });
+  //   }
+  // if (prevState.orderBy !== this.state.orderBy || prevState.sortBy !== this.state.sortBy) {
+  //   axios
+  //     .get(`${BASE_URL}/products?order=${this.state.orderBy}&limit=12&sort=${this.state.sortBy}`)
+  //     .then((res) => {
+  //       this.setState({
+  //         productCollection: res.data.data,
+  //         totalPage: res.data.total_page,
+  //       });
+  //     });
+  //   }
+  // if (prevState.sortBy !== this.state.sortBy) {
+  //   axios
+  //     .get(`${BASE_URL}/products?sort=${this.state.sortBy}&limit=12`)
+  //     .then((res) => {
+  //       this.setState({
+  //         productCollection: res.data.data,
+  //         totalPage: res.data.total_page,
+  //       });
+  //     });
+  //   }
+  // }
 
-  activeClass = () => {
-    this.setState({
-      isActive: true,
-    });
-  };
+  // filterCategory = (event) => {
+  //   const { id } = event.target;
+  //   console.log(event.target);
+  //   this.setState({
+  //     categoryId: id,
+  //   });
+  //   console.log(id);
+  // };
+
+  // orderBy = (event) => {
+  //   const { id } = event.target;
+  //   console.log(event.target);
+  //   this.setState({
+  //     orderBy: id,
+  //   });
+  //   console.log(id);
+  // };
+
+  // sortBy = (event) => {
+  //   const { id } = event.target;
+  //   console.log(event.target);
+  //   this.setState({
+  //     sortBy: id,
+  //   });
+  //   console.log(id);
+  // };
+
+  // activeClass = () => {
+  //   this.setState({
+  //     isActive: false,
+  //   });
+  // };
 
   render() {
+    const { searchParams, products } = this.props;
+    const category = searchParams.get("category");
+    const product_name = searchParams.get("product_name") || "";
+    const order = searchParams.get("order") || "created_at";
+    const sort = searchParams.get("sort") || "asc";
+    const page = searchParams.get("page") || "1";
+    console.log(this.props);
+
     return (
       <React.Fragment>
         <nav>
@@ -172,7 +225,17 @@ export class Products extends Component {
                   <li className="mode-switch">
                     <Link to="/history"> History </Link>
                   </li>
-                  {this.state.token ? <NavIsActive /> : <NavNoActive />}
+                  {this.state.token ? (
+                    <NavIsActive
+                      category={category}
+                      product_name={product_name}
+                      order={order}
+                      sort={sort}
+                      page={page}
+                    />
+                  ) : (
+                    <NavNoActive />
+                  )}
                 </div>
               </div>
             </div>
@@ -184,50 +247,64 @@ export class Products extends Component {
               <div className="menu-section-line">
                 <div className="menu-status dropdown-content">
                   <div className="item-status">
-                    <li                     
-                      className="status-type"
-                      // className={
-                      //   this.activeClass ? "status-type-active" : "status-type"
-                      // }
-                      id={3}
-                      onClick={this.filterCategory}
+                    <Link
+                      className={`${
+                        searchParams.get("category") === "3"
+                          ? "status-type-active"
+                          : "status-type"
+                      }`}
+                      to="/products?category=3&order=created_at&sort=asc&page=1"
                     >
                       Favorite & Promo
-                    </li>
+                    </Link>
                   </div>
                   <div className=" item-status">
-                    <li                      
-                      className="status-type"
-                      href="?category=2"
-                      id={2}
-                      onClick={this.filterCategory}
+                    <Link
+                      className={`${
+                        searchParams.get("category") === "2"
+                          ? "status-type-active"
+                          : "status-type"
+                      }`}
+                      to="/products?category=2&order=created_at&sort=asc&page=1"
                     >
                       Coffee
-                    </li>
+                    </Link>
                   </div>
                   <div className="item-status ">
-                    <li
-                      className="status-type"
-                      href="?category=5"
-                      id={5}
-                      onClick={this.filterCategory}
+                    <Link
+                      className={`${
+                        searchParams.get("category") === "5"
+                          ? "status-type-active"
+                          : "status-type"
+                      }`}
+                      to="/products?category=5&order=created_at&sort=asc&page=1"
                     >
                       Non Coffee
-                    </li>
+                    </Link>
                   </div>
                   <div className="item-status ">
-                    <li
-                      className="status-type "
-                      id={1}
-                      onClick={this.filterCategory}
+                    <Link
+                      className={`${
+                        searchParams.get("category") === "1"
+                          ? "status-type-active"
+                          : "status-type"
+                      }`}
+                      to="/products?category=1&order=created_at&sort=asc&page=1"
                     >
                       Foods
-                    </li>
+                    </Link>
                   </div>
-                  <div className="item-status ">
-                    <li className="status-type " onClick={this.filterCategory}>
+                  <div className="item-status">
+                    <Link
+                      className={`${
+                        searchParams.get("category") === null
+                          ? "status-type-active"
+                          : "status-type"
+                      }`}
+                      to="/products"
+                    >
                       All Products
-                    </li>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -242,27 +319,31 @@ export class Products extends Component {
                   </button>
                   <div className="dropdown-menu">
                     {/* eslint-disable-next-line */}
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="#"
-                      id="price"
-                      onClick={this.orderBy}
+                      to={`/products?${
+                        category ? "category=" + category + "&" : ""
+                      }${
+                        product_name ? "product_name=" + product_name + "&" : ""
+                      }order=price&sort=asc&page=1`}
                     >
                       Price
-                    </a>
+                    </Link>
                     {/* eslint-disable-next-line */}
                     {/* <a className="dropdown-item" href="#" id="transaction" onClick={this.orderBy}>
                       Transaction
                     </a> */}
                     {/* eslint-disable-next-line */}
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="#"
-                      id="updated_at"
-                      onClick={this.orderBy}
+                      to={`/products?${
+                        category ? "category=" + category + "&" : ""
+                      }${
+                        product_name ? "product_name=" + product_name + "&" : ""
+                      }order=created_at&sort=asc&page=1`}
                     >
                       New Item
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="dropdown">
@@ -275,34 +356,72 @@ export class Products extends Component {
                   </button>
                   <div className="dropdown-menu">
                     {/* eslint-disable-next-line */}
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="#"
-                      id="ASC"
-                      onClick={this.sortBy}
+                      to={`/products?${
+                        category ? "category=" + category + "&" : ""
+                      }${
+                        product_name ? "product_name=" + product_name + "&" : ""
+                      }order=${order}&sort=asc&page=1`}
                     >
                       Ascending
-                    </a>
+                    </Link>
                     {/* eslint-disable-next-line */}
-                    <a
+                    <Link
                       className="dropdown-item"
-                      href="#"
-                      id="DESC"
-                      onClick={this.sortBy}
+                      to={`/products?${
+                        category ? "category=" + category + "&" : ""
+                      }${
+                        product_name ? "product_name=" + product_name + "&" : ""
+                      }order=${order}&sort=desc&page=1`}
                     >
                       Descending
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </section>
               <AnimatedPage>
-                <Product
-                  products={this.state.productCollection}
-                  loading={this.state.loading}
-                ></Product>
+                <div className="menu-boxes GridView">
+                  {this.props.err && this.props.err.code && (
+                    <div className="container my-5">
+                      <div
+                        className="alert alert-warning"
+                        role="alert"
+                        style={{ height: "26vh" }}
+                      >
+                        <h2>
+                          Pencarian kata kunci "{product_name}" gagal. Silahkan
+                          coba lagi
+                        </h2>
+                        <p className="fw-bolder fst-italic">
+                          Kata Kunci: Nasi, Coffe dsb.{" "}
+                        </p>
+                        <p>
+                          Kami bukan toko peralatan, kami penyedia makanan dan
+                          minuman :)
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  {products.map((product) => {
+                    return (
+                      <Product
+                        key={product.id}
+                        id={product.id}
+                        image={`${process.env.REACT_APP_BASE_URL}${product.image}`}
+                        title={product.product_name}
+                        price={`${product.price}`}
+                      />
+                    );
+                  })}
+                </div>
               </AnimatedPage>
               <p>* the price has been cutted by discount appears</p>
-              <Pagination totalPage={this.state.totalPage}></Pagination>
+              <Pagination
+                currentPage={this.props.currentPage}
+                totalPage={this.props.totalPage}
+                paginate={this.handlePagination}
+              ></Pagination>
             </div>
             <nav aria-label="Page navigation example"></nav>
             <div className="promotion-section ">
@@ -332,6 +451,14 @@ export class Products extends Component {
                 <li>4. Should make member card to apply coupon</li>
               </ul>
             </div>
+            {this.state.role !== "admin" ? (
+              <></>
+            ) : (
+              <div className="btn btn-primary btn-lg btn-block aside-button">
+                <button className="btn btn-choco">Edit Promo</button>
+                <button className="btn btn-choco">Create Promo</button>
+              </div>
+            )}
           </div>
         </main>
 
@@ -393,4 +520,17 @@ export class Products extends Component {
   }
 }
 
-export default Products;
+const mapStateToProps = (state) => {
+  const {
+    products: { products, newItems, totalPage, currentPage, err },
+  } = state;
+  return {
+    products,
+    newItems,
+    totalPage,
+    currentPage,
+    err,
+  };
+};
+
+export default connect(mapStateToProps)(withSearchParams(Products));

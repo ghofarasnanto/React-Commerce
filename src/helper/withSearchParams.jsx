@@ -11,6 +11,7 @@ function withSearchParams(Component) {
       <Component
         searchParams={searchParams}
         setSearchParams={setSearchParams}
+        {...props}
       />
     );
   }

@@ -1,0 +1,56 @@
+.img-bg-menu-detail {
+    height: 100vw;
+    background-color: #ffffff;
+}
+
+.input-group>input {
+    border: 1px solid #9f9f9f;
+    border-radius: 10px !important;
+}
+
+.icon-size-d-menu a {
+    width: 55px;
+    height: 55px;
+    font-size: 33px;
+    text-align: center;
+    line-height: 51px;
+    margin: 0px auto;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #e9b858;
+    color: #000000;
+    border-radius: 50%;
+    margin: 1%;
+}
+
+.icon-size-d-menu p {
+    width: 55px;
+    height: 55px;
+    font-size: 17px;
+    text-align: center;
+    line-height: 51px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #efeeee;
+    color: #000000;
+    border-radius: 50%;
+    margin: 1%;
+}
+
+.timepickerstart::before {
+    content: 'Select start hour';
+    margin-right: 3em;
+    font-size: larger;
+}
+
+.timepickerend::before {
+    content: 'Select end hour';
+    margin-right: 3em;
+    font-size: larger;
+}
+
+.icon-delivery-d-menu a {
+    margin: unset;
+}

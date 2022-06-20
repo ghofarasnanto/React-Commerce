@@ -4,6 +4,8 @@ import AnimatedPage from "../../AnimatePage";
 import { FormErrors } from "../../component/FormError";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios";
+// import { connect } from "react-redux"
+// import { loginUtils } from "../../utils/auth"
 
 import "./login.css";
 
@@ -140,7 +142,7 @@ export class Login extends Component {
                     onChange={this.handleUserInput}
                   />
                   <i
-                    className="fa fa-eye password-icon"
+                    className={isPasswordShown ? "fa fa-eye password-icon" : "fa fa-eye-slash password-icon" }
                     onClick={this.togglePasswordVisiblity}
                   />
                 </div>

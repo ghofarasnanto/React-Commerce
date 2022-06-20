@@ -1,24 +1,24 @@
 import {
-  LOADING,
+  FETCHING,
   FULLFILLED,
   REJECTED,
   authLogin,
-} from "../actionType/auth";
+} from "../actionType/action";
 
 const initialState = {
-  data: {},
+  dataLogin: {},
   isFetching: false,
   err: null,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case authLogin + LOADING:
-      return { ...state, isLoading: true };
+    case authLogin + FETCHING:
+      return { ...state, isFetching: true };
     case authLogin + FULLFILLED:
       return {
         ...state,
-        data: action.payload.value.data.data,
+        dataLogin: action.payload.value.data.data,
         isFetching: false,
       };
     case authLogin + REJECTED:

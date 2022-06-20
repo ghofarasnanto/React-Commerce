@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AnimatedPage from "../../AnimatePage";
-import Search from "../../component/Search";
+import NavIsActive from "../../component/NavIsActive";
+import NavNoActive from "../../component/NavNoActive";
+
+import { getProfile } from "../../utils/axios";
 
 export class Profile extends Component {
+  constructor() {
+    super();
+    this.state = {
+      token: localStorage.getItem("token") || "",
+    };
+  }
   render() {
     return (
       <React.Fragment>
@@ -51,29 +60,12 @@ export class Profile extends Component {
                   <li className="mode-switch">
                     <Link to="/history"> History </Link>
                   </li>
-                  <div className="side-nav-header">
-                    <Search></Search>
-                    <button className="promotion-btn">
-                      <span className="notification-badge">1</span>
-                      <a href=" ">
-                        <img src="assets/img/chat.png" alt="chat-img" />
-                      </a>
-                    </button>
-                    <button className="profile-btn">
-                      <Link to="/profile">
-                        <img
-                          src="assets/img/home/cust1.png"
-                          alt="profile-img"
-                        />
-                      </Link>
-                    </button>
-                  </div>
+                  {this.state.token ? <NavIsActive /> : <NavNoActive />}
                 </div>
               </div>
             </div>
           </header>
         </nav>
-
         <main>
           <img
             className="img-bg-payment"

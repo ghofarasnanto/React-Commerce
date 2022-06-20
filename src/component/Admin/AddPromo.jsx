@@ -5,10 +5,6 @@ import BASE_URL from "../../BASE_URL";
 import AnimatedPage from "../../AnimatePage";
 import Search from "../Search";
 import toast, { Toaster } from "react-hot-toast";
-// import { confirmAlert } from 'react-confirm-alert';
-import { loadProgressBar } from 'x-axios-progress-bar';
-
-import "./style.css";
 
 export class ProductDetail extends Component {
   constructor() {
@@ -22,48 +18,13 @@ export class ProductDetail extends Component {
     };
   }
 
-  // confirmBoxSubmit = (event) => {
-  //   event.preventDefault();
-  //   confirmAlert({
-  //     title: 'stay one moment!',
-  //     message: 'Are you sure do you want to Add Product.',
-  //     buttons: [
-  //       {
-  //         label: 'Yes',
-  //         onClick: () => {
-  //           this.handleProductInput();
-  //         }
-  //       },
-  //       {
-  //         label: 'No',
-  //       }
-  //     ]
-  //   });
-  // };
-
   handleProductInput = (event) => {
     event.preventDefault();
-    const {
-      product_name,
-      price,
-      description,
-      delivery_method,
-      product_size,
-      category_id,
-      start_hour,
-      end_hour,
-      stock,
-    } = this.state;
+    const { product_name, price, description } = this.state;
     const body = {
       product_name: product_name,
       price: price,
       description: description,
-      delivery_method: delivery_method,
-      product_size: product_size,
-      category_id: category_id,
-      start_hour: start_hour,
-      end_hour: end_hour,
-      stock: stock,
     };
 
     const token = localStorage.getItem("token");
@@ -75,7 +36,6 @@ export class ProductDetail extends Component {
         },
       })
       .then((res) => {
-    loadProgressBar();
         toast.success("Created Product Successfully!");
         console.log(res);
         this.setState({
@@ -90,12 +50,6 @@ export class ProductDetail extends Component {
           console.log(error);
         }
       });
-  };
-
-  handleImageChange = (event) => {
-    this.setState({
-      image: URL.createObjectURL(event.target.files[0]),
-    });
   };
 
   render() {
@@ -172,27 +126,21 @@ export class ProductDetail extends Component {
           <div className="img-bg-menu-detail"></div>
           <div className="bg-img-detail-menu" style={{ marginTop: "50%" }}>
             <div className="title-header-d-menu">
-              <b>Products &gt; Add New Product</b>
+              <b>Promo &gt; Add New Promo</b>
             </div>
             <AnimatedPage>
               <form onSubmit={this.handleProductInput}>
                 <div className="d-flex flex-row py-5">
                   <div className="col-md-4">
                     <div className="flex-column ">
-                      <div className="p-2 mb-5">
+                      <div className="p-2">
                         <img
                           className="img-profile"
                           src="/assets/img/avatar.png"
                           alt="user"
                         />
                         <label className="btn btn-dark btn-lg btn-block">
-                          <input
-                            style={{ display: "none" }}
-                            type="file"
-                            accept="image/*"
-                            capture="environment"
-                            onChange={this.handleImageChange}
-                          />
+                          <input type="file" name="image" hidden />
                           Take a picture
                         </label>
                         <label className="btn btn-primary btn-lg btn-block">
@@ -200,51 +148,127 @@ export class ProductDetail extends Component {
                           Choose from gallery
                         </label>
                       </div>
-                      <div className="p-2 pt-5">
+                      <div className="p-2">
                         <div className="input-group">
-                          <label>Delivery Hour :</label>
-                          <input
-                            name="time"
-                            className="timepickerstart"
-                            type="time"
-                            required={true}
-                            value={this.state.start_hour}
-                            onChange={(event) => {
-                              this.setState({
-                                start_hour: event.target.value,
-                              });
-                            }}
-                          />
-
-                          <input
-                            name="time"
-                            className="timepickerend"
-                            type="time"
-                            required={true}
-                            value={this.state.end_hour}
-                            onChange={(event) => {
-                              this.setState({
-                                end_hour: event.target.value,
-                              });
-                            }}
-                          />
+                          <label>Enter the discount :</label>
+                        </div>
+                        <div className="dropdown show">
+                          <a
+                            className="btn btn-tranparent dropdown-toggle"
+                            href=" "
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            Input discount
+                          </a>
+                          <div
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                          >
+                            <a className="dropdown-item" href=" ">
+                              Action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Another action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Something else here
+                            </a>
+                          </div>
                         </div>
                       </div>
                       <div className="p-2">
                         <div className="input-group">
-                          <label>Input Stock :</label>
-                          <input
-                            name="number"
-                            placeholder="Input Stock"
-                            type="number"
-                            required={true}
-                            value={this.state.stock}
-                            onChange={(event) => {
-                              this.setState({
-                                stock: event.target.value,
-                              });
-                            }}
-                          />
+                          <label>Expire Date :</label>
+                        </div>
+                        <div className="dropdown show">
+                          <a
+                            className="btn btn-tranparent dropdown-toggle"
+                            href=" "
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            Select start date
+                          </a>
+                          <div
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                          >
+                            <a className="dropdown-item" href=" ">
+                              Action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Another action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Something else here
+                            </a>
+                          </div>
+                        </div>
+                        <div className="dropdown show">
+                          <a
+                            className="btn btn-tranparent dropdown-toggle"
+                            href=" "
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            Select end date
+                          </a>
+                          <div
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                          >
+                            <a className="dropdown-item" href=" ">
+                              Action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Another action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Something else here
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-2">
+                        <div className="input-group">
+                          <label>Input Coupon code :</label>
+                        </div>
+                        <div className="dropdown show">
+                          <a
+                            className="btn btn-tranparent dropdown-toggle"
+                            href=" "
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            Input code
+                          </a>
+                          <div
+                            className="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                          >
+                            <a className="dropdown-item" href=" ">
+                              Action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Another action
+                            </a>
+                            <a className="dropdown-item" href=" ">
+                              Something else here
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -305,48 +329,36 @@ export class ProductDetail extends Component {
                       </div>
                       <div className="p-2">
                         <label>Input product size :</label>
-                        <h5> Click size you want to use for this product</h5>
+                        <h5> CLick size you want to use for this product</h5>
                         <div className="input-group">
-                          <div className="d-flex col-md-12 icon-size-d-menu justify-content-between">
+                          <div className="d-flex icon-size-d-menu">
                             <a href=" ">R</a>
                             <a href=" ">L</a>
                             <a href=" ">XL</a>
-                            <p href=" ">200gr</p>
-                            <p href=" ">340gr</p>
-                            <p href=" ">500gr</p>
+                            <a href=" ">200gr</a>
+                            <a href=" ">340gr</a>
+                            <a href=" ">500gr</a>
                           </div>
                         </div>
                       </div>
                       <div className="p-2">
-                        <label>Input Delivery Methods :</label>
+                        <label>Input Delivery Methods </label>
                         <h5> CLick method you want to use for this product</h5>
-                        <div className="d-flex col-md-12 icon-delivery-d-menu justify-content-between">
+                        <div className="d-flex col-md-12 icon-delivery-d-menu">
                           <a href=" ">Dine in</a>
                           <a href=" ">Door Delivery</a>
                           <a href=" ">Pick up</a>
                         </div>
                       </div>
                       <div className="p-2">
-                        <input
-                          type="submit"
-                          className="login-button"
-                          value="Save Product"
-                        />
+                        <input type="submit" className="login-button" />
 
-                        {/* <Link
+                        <Link
                           to="/404"
                           className="google-submit text-decoration-none"
                         >
                           Cancel
-                        </Link> */}
-                        <div
-                          className="google-submit text-decoration-none"
-                          onClick={(event) => {
-                            toast.error("Cancel!");
-                          }}
-                        >
-                          Cancel
-                        </div>
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -11,7 +11,7 @@ const Search = () => {
     e.preventDefault()
       setQ(e.target.search.value)
       console.log(product_name)
-      navigate(`/search?product_name=${(e.target.search.value).toLowerCase()}`)   
+      navigate(`/products?product_name=${(e.target.search.value).toLowerCase()}`)   
   };
 
   useEffect(() => {

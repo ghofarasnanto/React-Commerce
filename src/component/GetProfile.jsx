@@ -61,6 +61,7 @@ export class Profile extends Component {
         // window.location.href = "/";
       });
   };
+  
 
   changeImage = (event) => {
     event.preventDefault();
