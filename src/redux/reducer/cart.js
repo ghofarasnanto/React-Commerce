@@ -1,4 +1,4 @@
-import { sizeProduct, idProduct, timeProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct } from "../actionType/action"
+import { sizeProduct, idProduct, deliveryProduct, countDec, countInc, imgProduct, nameProduct, priceProduct } from "../actionType/action"
 const initialState = {
     id: "",
     price: 0,
@@ -23,9 +23,6 @@ const cartReducer = (state = initialState, action) => {
         case sizeProduct:
             const { size } = action.payload
             return {...state, size }
-        case timeProduct:
-            const { time } = action.payload
-            return {...state, time }
         case deliveryProduct:
             const { delivery } = action.payload
             return {...state, delivery }

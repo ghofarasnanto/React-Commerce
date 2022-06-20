@@ -1,14 +1,12 @@
 // import React, { useState, useEffect } from "react";
 import React, { Component } from "react";
-import { Link, NavLink, Navigate, useParams } from "react-router-dom";
-import axios from "axios";
+import { Link, NavLink, Navigate } from "react-router-dom";
 import "./productstyle.css";
 // import BASE_URL from "../../BASE_URL";
 import AnimatedPage from "../../AnimatePage";
 import { connect } from "react-redux";
 import { getProductDetail } from "../../utils/axios";
-import NavIsActive from "../../component/NavIsActive";
-import NavNoActive from "../../component/NavNoActive";
+import Search from "../../component/Search";
 
 import {
   increment,
@@ -24,7 +22,6 @@ import {
 } from "../../redux/actionType/cart";
 
 import withParams from "../../helper/withParams";
-import _default from "react-bootstrap/esm/Accordion";
 
 // function ProductDetail() {
 //   const { id } = useParams();
@@ -56,7 +53,6 @@ export class ProductDetail extends Component {
       successMsg: "",
       errorMsg: "",
       token: localStorage.getItem("token") || "",
-      // role: localStorage.getItem("role"),
       products: {
         productDetails: [],
       },
@@ -123,22 +119,24 @@ export class ProductDetail extends Component {
   }
 
   setCart = () => {
-    const {params: {id}} = this.props;
+    const {
+      params: { id },
+    } = this.props;
     let cartItems = localStorage.getItem("cart") || "[]";
     let data = JSON.parse(cartItems);
     let cartItemForProducts = data.filter((item) => {
       if (item.product_id === id) {
-          return true
+        return true;
       }
       return false;
     });
 
     if (cartItemForProducts.length > 0) {
       this.setState({
-        cart: cartItemForProducts[0]
+        cart: cartItemForProducts[0],
       });
     }
-  }
+  };
 
   addToCart = () => {
     const {
@@ -174,13 +172,13 @@ export class ProductDetail extends Component {
   };
 
   render() {
-    const { role, token, cart } = this.state;
+    const { cart } = this.state;
     const { productDetails } = this.state.products;
     const {
       params: { id },
       // navigate,
       dispatch,
-      qty,
+      // qty,
       size,
       delivery,
       checkOut,
@@ -240,7 +238,23 @@ export class ProductDetail extends Component {
                   <li className="mode-switch">
                     <Link to="/history"> History </Link>
                   </li>
-                  {this.state.token ? <NavIsActive /> : <NavNoActive />}
+                  <div className="side-nav-header">
+                    <Search></Search>
+                    <button className="promotion-btn">
+                      <span className="notification-badge">1</span>
+                      <a href=" ">
+                        <img src="/assets/img/chat.png" alt="chat-img" />
+                      </a>
+                    </button>
+                    <button className="profile-btn">
+                      <Link to="/profile">
+                        <img
+                          src="/assets/img/home/cust1.png"
+                          alt="profile-img"
+                        />
+                      </Link>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -292,42 +306,41 @@ export class ProductDetail extends Component {
                       <p className="text-center">
                         <b>Choose a size </b>
                       </p>
-                      <div className="d-flex icon-size-d-menu">
-                        <button
-                          href=" "
+                      <div className="d-flex col-md-12 justify-content-between icon-size-d-menu">
+                        <a
+                          href=" #"
                           onClick={() => {
                             dispatch(setSize("Regular"));
                           }}
                         >
                           R
-                        </button>
-                        <button
-                          href=" "
+                        </a>
+                        <a
+                          href=" #"
                           onClick={() => {
                             dispatch(setSize("Large"));
                           }}
                         >
                           L
-                        </button>
-                        <button
-                          href=" "
+                        </a>
+                        <a
+                          href=" #"
                           onClick={() => {
                             dispatch(setSize("Extra Large"));
                           }}
                         >
                           XL
-                        </button>
+                        </a>
                       </div>
                     </div>
                     <div className="text-center">
                       <p>
                         <b>Choose Delivery Methods </b>
                       </p>
-                      <div className="d-flex col-md-12 icon-delivery-d-menu">
+                      <div className="d-flex col-md-12 icon-delivery-d-menu justify-content-around">
                         <input
                           type="radio"
                           className="btn-check"
-                          name="options-outlined"
                           id="dinein"
                           value="Dine in"
                           checked={delivery === "Dine in"}
@@ -335,16 +348,12 @@ export class ProductDetail extends Component {
                             dispatch(setDelivery(event.target.value));
                           }}
                         />
-                        <label
-                          className="btn btn-outline-order"
-                          htmlFor="dinein"
-                        >
-                          Dine In
+                         <label className="icon-delivery-d-menu" htmlFor="pick">
+                          <a href=" #" >Dine in</a>
                         </label>
                         <input
                           type="radio"
                           className="btn-check"
-                          name="options-outlined"
                           id="door"
                           value="Door Delivery"
                           checked={delivery === "Door Delivery"}
@@ -352,16 +361,13 @@ export class ProductDetail extends Component {
                             dispatch(setDelivery(event.target.value));
                           }}
                         />
-                        <label
-                          className="btn btn-outline-order mt-2 mt-md-0"
-                          htmlFor="door"
-                        >
-                          Door Delivery
+                       
+                        <label className="icon-delivery-d-menu" htmlFor="pick">
+                          <a href=" #" >Door Delivery</a>
                         </label>
                         <input
                           type="radio"
                           className="btn-check"
-                          name="options-outlined"
                           id="pick"
                           value="Pick up"
                           checked={delivery === "Pick up"}
@@ -369,11 +375,8 @@ export class ProductDetail extends Component {
                             dispatch(setDelivery(event.target.value));
                           }}
                         />
-                        <label
-                          className="btn btn-outline-order mt-2 mt-md-0"
-                          htmlFor="pick"
-                        >
-                          Pick up
+                        <label className="icon-delivery-d-menu" htmlFor="pick">
+                          <a href=" #" >Pick up</a>
                         </label>
                       </div>
                     </div>
@@ -398,37 +401,36 @@ export class ProductDetail extends Component {
                     </label>
                   </div>
                 </div>
-                <div className="card-deck card-content-d-menu">
-                  <div className="card rounded card-d-menu">
-                    <div className="d-flex">
-                      <div className="col-md-9 card-checkout">
-                        <div className="">
-                          <a href=" ">
-                            <img
-                              className="img-menu-detail"
-                              src={`${process.env.REACT_APP_BASE_URL}${productDetails.image}`}
-                              alt=""
-                            />
-                          </a>
+                <div className="card rounded mr-5">
+                  <div className="d-flex">
+                    <div className="col-md-9 card-checkout">
+                      <div className="">
+                        <a href=" ">
+                          <img
+                            className="img-menu-detail"
+                            src={`${process.env.REACT_APP_BASE_URL}${productDetails.image}`}
+                            alt=""
+                          />
+                        </a>
+                      </div>
+                      <div className="ms-2 col-md-5 text-md-left">
+                        <p className="title fw-bold">
+                          {productDetails.product_name}
+                        </p>
+                        <div className="d-flex">
+                          {cart.qty !== 0 ? (
+                            <p className="qty">{`${cart.qty}x `}</p>
+                          ) : null}
+                          <p className="size ms-md-2 ms-0">{size}</p>
                         </div>
-                        <div className="ms-2 col-md-5 text-md-left">
-                          <p className="title fw-bold">
-                            {productDetails.product_name}
-                          </p>
-                          <div className="d-flex">
-                            {cart.qty !== 0 ? (
-                              <p className="qty">{`${cart.qty}x `}</p>
-                            ) : null}
-                            <p className="size ms-md-2 ms-0">{size}</p>
-                          </div>
-                        </div>
-                        {/* <div>
+                      </div>
+                      {/* <div>
                       <h3>Cold Brew</h3>
                       <p>1x(Large)</p>
                       <p>1(Reguler)</p>
                     </div> */}
-                        <div className="px-4">
-                          {/* <div className="col-sm-12 mx-auto">
+                      <div className="px-4">
+                        {/* <div className="col-sm-12 mx-auto">
                         <div className="input-group">
                           <span className="input-group-prepend my-5">
                             <button
@@ -461,42 +463,41 @@ export class ProductDetail extends Component {
                           </span>
                         </div>
                       </div> */}
-                          <div className="d-flex justify-content-center">
-                            <button
-                              onClick={() => {
-                                if (cart.qty > 0) {
-                                  dispatch(decrement());
-                                }
-                              }}
-                              className="btn btn-choco rounded-circle"
-                            >
-                              -
-                            </button>
-                            <div className="col-md-4 mx-3 mx-md-0 text-center mt-1 fw-bold">
-                              {cart.qty}
-                            </div>
-                            <button
-                              onClick={() => {
-                                dispatch(increment());
-                              }}
-                              className="btn btn-choco rounded-circle"
-                            >
-                              +
-                            </button>
+                        <div className="d-flex justify-content-center">
+                          <button
+                            onClick={() => {
+                              if (cart.qty > 0) {
+                                dispatch(decrement());
+                              }
+                            }}
+                            className="btn btn-choco rounded-circle"
+                          >
+                            -
+                          </button>
+                          <div className="col-md-4 mx-3 mx-md-0 text-center mt-1 fw-bold">
+                            {cart.qty}
                           </div>
+                          <button
+                            onClick={() => {
+                              dispatch(increment());
+                            }}
+                            className="btn btn-choco rounded-circle"
+                          >
+                            +
+                          </button>
                         </div>
                       </div>
-                      <div className="col-md-3 button-checkout">
-                        {/* <div>
+                    </div>
+                    <div className="col-md-3 button-checkout">
+                      {/* <div>
                       <Link to="/payment">Chekcout</Link>
                     </div> */}
-                        <button
-                          onClick={this.checkOutHandle}
-                          className="btn btn-warning w-100 h-100 rounded-4"
-                        >
-                          CHECKOUT
-                        </button>
-                      </div>
+                      <button
+                        onClick={this.checkOutHandle}
+                        className="btn btn-warning w-100 h-100 rounded-4"
+                      >
+                        CHECKOUT
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -504,7 +505,6 @@ export class ProductDetail extends Component {
             </div>
           ) : null}
         </main>
-
         <footer>
           <div className="page-content-footer">
             <div className="main-footer all-footer">

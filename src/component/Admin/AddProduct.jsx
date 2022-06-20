@@ -7,6 +7,7 @@ import Search from "../Search";
 import toast, { Toaster } from "react-hot-toast";
 // import { confirmAlert } from 'react-confirm-alert';
 import { loadProgressBar } from 'x-axios-progress-bar';
+import Upload from "../../component/Upload"
 
 import "./style.css";
 
@@ -71,7 +72,7 @@ export class ProductDetail extends Component {
       .post(`${BASE_URL}/products/`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
+          "content-type": "multipart/form-data",
         },
       })
       .then((res) => {
@@ -180,7 +181,8 @@ export class ProductDetail extends Component {
                   <div className="col-md-4">
                     <div className="flex-column ">
                       <div className="p-2 mb-5">
-                        <img
+                        <Upload />
+                        {/* <img
                           className="img-profile"
                           src="/assets/img/avatar.png"
                           alt="user"
@@ -198,7 +200,7 @@ export class ProductDetail extends Component {
                         <label className="btn btn-primary btn-lg btn-block">
                           <input type="file" name="image" hidden />
                           Choose from gallery
-                        </label>
+                        </label> */}
                       </div>
                       <div className="p-2 pt-5">
                         <div className="input-group">
@@ -318,12 +320,68 @@ export class ProductDetail extends Component {
                         </div>
                       </div>
                       <div className="p-2">
-                        <label>Input Delivery Methods :</label>
-                        <h5> CLick method you want to use for this product</h5>
+                        <label>Input Category Product :</label>
+                        <h5> Click category you want to use for this product</h5>
                         <div className="d-flex col-md-12 icon-delivery-d-menu justify-content-between">
-                          <a href=" ">Dine in</a>
-                          <a href=" ">Door Delivery</a>
-                          <a href=" ">Pick up</a>
+                        <div className="d-flex gap-3 mt-3">
+                    <input
+                      className="btn-check"
+                      type="radio"
+                      name="options-outlined"
+                      id="coffe"
+                      value={this.category_id}
+                      checked={this.category_id === "1"}
+                      onChange={(event) => {
+                        this.setState({
+                          category_id: "1",
+                        });
+                      }}
+                    />
+                    <label
+                      htmlFor="Foods"
+                      className="btn btn-outlined-order btn-warning"
+                    >
+                      Foods
+                    </label>
+                    <input
+                      className="btn-check"
+                      type="radio"
+                      name="options-outlined"
+                      id="non-coffe"
+                      value={this.category_id}
+                      checked={this.category_id === "2"}
+                      onChange={() => {
+                        this.setState({
+                          category_id: "2",
+                        });
+                      }}
+                    />
+                    <label
+                      htmlFor="Coffee"
+                      className="btn btn-outlined-order btn-warning"
+                    >
+                      Coffee
+                    </label>
+                    <input
+                      className="btn-check"
+                      type="radio"
+                      name="options-outlined"
+                      id="foods"
+                      value={this.category_id}
+                      checked={this.category_id === "5"}
+                      onChange={() => {
+                        this.setState({
+                          category_id: "5",
+                        });
+                      }}
+                    />
+                    <label
+                      htmlFor="Non-Coffee"
+                      className="btn btn-outlined-order btn-warning"
+                    >
+                      Non Coffee
+                    </label>
+                  </div>
                         </div>
                       </div>
                       <div className="p-2">
