@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+<H1 align="center">FRONT END</H1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="src/assets/img/favicon.ico">
+  <h1>COFFEE SHOP</h1>
 
-## Available Scripts
+ [![AXIOS](https://img.shields.io/badge/Axios-0.27.2-blue)](https://www.npmjs.com/package/axios) [![REDUX](https://img.shields.io/badge/Redux-4.2.0-purple)](https://www.npmjs.com/package/redux) [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2.0-magenta)](https://www.npmjs.com/package/bootstrap) [![React-Bootstrap](https://img.shields.io/badge/react--bootstrap-v2.4.0-blue)](https://www.npmjs.com/package/bootstrap)[![React-router-dom](https://img.shields.io/npm/v/react-router-dom?label=React-router-dom)](https://www.npmjs.com/package/react-router-dom)
 
-In the project directory, you can run:
+<br/>
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## DEMO
+
+[Netlify deploy link](https://coffeeshop-heroku.netlify.app/)
+
+Coffee shop website is a service for order food and beverages. Customer can simply register, login, see products, order, see order history, edit their profile, etc.
+
+## Features
+
+### Users:
+
+- Register
+- Login
+- Search Products
+- Filter Products
+- Products Detail
+- Edit Profile
+- Payment or Checkout
+
+### Admin:
+
+- Create Product
+
+## How to Run the Application
+
+### 1. Clone the Repository
+
+Clone this repository by running the following command :
+
+```shell
+
+$ git clone https://github.com/ghofarasnanto/React-Commerce
+
+```
+
+### 2. Install dependency packages
+
+Install dependency packages by run the following code inside project folder:
+
+```shell
+
+$ npm install
+
+```
+
+OR
+
+```shell
+
+$ npm i
+
+```
+
+### 3. Set up Project
+
+- Configure url file
+
+Configure url file by create file named BASE_URL inside project folder and add this line to the file:
+
+<br/>
+
+```shell
+BASE_URL = "process.env.REACT_APP_BASE_URL"
+```
+
+- Configure .env file
+
+Configure .env file by create file named .env inside project folder and add this line to the file:
+
+<br/>
+
+```shell
+REACT_APP_BASE_URL = "YOUR HOST"
+```
+
+- Run Project
+
+Run the app in development mode after server/backend is running. with a command like the following :
+
+```
+$ npm run start
+```
+
+Open http://localhost:3000 in your browser after project running.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `npm run build`
+<div style="display:flex" align="center">
+<div>
+<img width="200" src="src/assets/readme/homepage.png" alt="Home page">
+<img width="200" src="src/assets/readme/login.png" alt="detail">
+</div>
+<div>
+<img width="200" src="src/assets/readme/product.png" alt="products">
+<img width="200" src="src/assets/readme/addproduct.png" alt="Login">
+</div>
+</div>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Related Projects
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Coffee Shop - Backend](https://github.com/ghofarasnanto/coffeshop-node.js)

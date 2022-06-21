@@ -12,7 +12,6 @@ import Promotion from "../Promotion";
 import NavIsActive from "../../component/NavIsActive";
 import NavNoActive from "../../component/NavNoActive";
 import withSearchParams from "../../helper/withSearchParams";
-import { loadProgressBar } from "x-axios-progress-bar";
 
 import { getAllProductsRedux } from "../../redux/actionType/products";
 

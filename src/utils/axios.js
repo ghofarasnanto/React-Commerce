@@ -41,3 +41,9 @@ export const getProfile = (token) => {
     });
     return results;
 };
+
+
+export const sortDeleteHistories = (token, id) => {
+    const URL = `${BASE_URL}/transactions/${id}`;
+    return axios.patch(URL, { headers: { "x-access-token": token } });
+};

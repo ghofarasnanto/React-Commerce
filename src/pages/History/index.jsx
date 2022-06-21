@@ -2,8 +2,43 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AnimatedPage from "../../AnimatePage";
 import Search from "../../component/Search";
+import { sortDeleteHistories } from "../../utils/axios";
 
 export class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: localStorage.getItem("token") || null,
+      history: [],
+    };
+    this.handleDeleteProduct.bind(this);
+  }
+
+  handleDeleteProduct = (id) => {
+    sortDeleteHistories(this.state.token, id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const newHistory = this.state.history.filter((item) => {
+      return item.id !== id;
+    });
+    this.setState({
+      history: newHistory,
+    });
+  };
+
+
+  componentDidMount() {
+    const { token } = this.state;
+    console.log(token);
+    if (token !== null) {
+      this.getHistoryProducts(token);
+      // console.log(token);
+    }
+  }
   render() {
     return (
       <React.Fragment>
