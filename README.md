@@ -1,7 +1,5 @@
-<H1 align="center">FRONT END</H1>
-
 <div align="center">
-  <img src="src/assets/img/favicon.ico">
+  <img src="public/assets/img/favicon.ico">
   <h1>COFFEE SHOP</h1>
 
  [![AXIOS](https://img.shields.io/badge/Axios-0.27.2-blue)](https://www.npmjs.com/package/axios) [![REDUX](https://img.shields.io/badge/Redux-4.2.0-purple)](https://www.npmjs.com/package/redux) [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2.0-magenta)](https://www.npmjs.com/package/bootstrap) [![React-Bootstrap](https://img.shields.io/badge/react--bootstrap-v2.4.0-blue)](https://www.npmjs.com/package/bootstrap)[![React-router-dom](https://img.shields.io/npm/v/react-router-dom?label=React-router-dom)](https://www.npmjs.com/package/react-router-dom)
@@ -10,11 +8,13 @@
 
 </div>
 
+
+
+Coffee shop website is a service for order food and beverages. Customer can simply register, login, see products, order, see order history, edit their profile, etc.
+
 ## DEMO
 
 [Netlify deploy link](https://coffeeshop-heroku.netlify.app/)
-
-Coffee shop website is a service for order food and beverages. Customer can simply register, login, see products, order, see order history, edit their profile, etc.
 
 ## Features
 
@@ -102,12 +102,12 @@ You may also see any lint errors in the console.
 
 <div style="display:flex" align="center">
 <div>
-<img width="200" src="src/assets/readme/homepage.png" alt="Home page">
-<img width="200" src="src/assets/readme/login.png" alt="detail">
+<img width="200" src="public/assets/img/readme/homepage.png" alt="Home page">
+<img width="200" src="public/assets/img/readme/login.png" alt="login">
 </div>
 <div>
-<img width="200" src="src/assets/readme/product.png" alt="products">
-<img width="200" src="src/assets/readme/addproduct.png" alt="Login">
+<img width="200" src="public/assets/img/readme/product.png" alt="products">
+<img width="200" src="public/assets/img/readme/addproduct.png" alt="addproduct">
 </div>
 </div>
 
