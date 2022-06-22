@@ -2,7 +2,7 @@
   <img src="public/assets/img/favicon.ico">
   <h1>COFFEE SHOP</h1>
 
- [![AXIOS](https://img.shields.io/badge/Axios-0.27.2-blue)](https://www.npmjs.com/package/axios) [![REDUX](https://img.shields.io/badge/Redux-4.2.0-purple)](https://www.npmjs.com/package/redux) [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1.3-green)](https://www.npmjs.com/package/bootstrap) [![React-Bootstrap](https://img.shields.io/badge/react--bootstrap-v2.4.0-blue)](https://www.npmjs.com/package/bootstrap)[![React-router-dom](https://img.shields.io/npm/v/react-router-dom?label=React-router-dom)](https://www.npmjs.com/package/react-router-dom)
+ [![AXIOS](https://img.shields.io/badge/Axios-0.27.2-orange)](https://www.npmjs.com/package/axios) [![REDUX](https://img.shields.io/badge/Redux-4.2.0-purple)](https://www.npmjs.com/package/redux) [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1.3-green)](https://www.npmjs.com/package/bootstrap) [![React-Bootstrap](https://img.shields.io/badge/react--bootstrap-2.4.0-yellow)](https://www.npmjs.com/package/bootstrap)[![React-router-dom](https://img.shields.io/npm/v/react-router-dom?label=React-router-dom)](https://www.npmjs.com/package/react-router-dom)
 
 <br/>
 
