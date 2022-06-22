@@ -93,10 +93,6 @@ $ npm run start
 
 Open http://localhost:3000 in your browser after project running.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-
 ## Screenshots
 
 <div style="display:flex" align="center">
